@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:text="logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/main_icon"/>
+
+    <ListView
+        android:id="@+id/mainlistview"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginRight="30sp"
+        android:layout_marginLeft="30sp"
+        android:background="#C7C8CC" />
+
+    <Button
+        android:id="@+id/createGroupBtn"
+        android:text="create Group"
+        android:background="@drawable/radius"
+        android:layout_margin="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/myInfoBtn"
+        android:text="My Info"
+        android:background="@drawable/radius"
+        android:layout_marginLeft="30sp"
+        android:layout_marginRight="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

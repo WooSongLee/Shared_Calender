@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "629328260772",
+    "project_id": "shared-calender-51853",
+    "storage_bucket": "shared-calender-51853.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629328260772:android:6725e2944989e9a5764031",
+        "android_client_info": {
+          "package_name": "com.wosong.shared_calender"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2EkEj-hP_buRSzpVHztEvAPSxUG3tkWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
