@@ -1,15 +1,11 @@
 package com.wosong.shared_calender
-
 import Authentication.LoginActivity
 import Model.GroupMakingModel
-import Model.UserModel
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.icu.text.MessagePattern.ApostropheMode
-import android.icu.text.MessagePattern.validateArgumentName
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.WindowManager
 import android.widget.Button
@@ -23,7 +19,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.getValue
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -36,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private var groupCount : Int = 0
+    private val groupNames : MutableList<String> = mutableListOf()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +64,18 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    }
+        val infobtn = findViewById<Button>(R.id.myInfoBtn)
+        infobtn.setOnClickListener {
+            val intent = Intent(this, MyInfoActivity::class.java)
+            startActivity(intent)
+        }
+        listView.setOnItemClickListener { parent, view, position, id ->
+            val intent = Intent(this, Calender::class.java)
+            val groupName = groupNames[position]
+            intent.putExtra("groupName", groupName)
+            startActivity(intent)
+        }
+    }//end of oncreate
     fun updateUserData(){
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -76,6 +83,8 @@ class MainActivity : AppCompatActivity() {
                 for(dataModel in dataSnapshot.children){
                    val group = dataModel.getValue(GroupMakingModel::class.java)
                     groupList.add(group!!)
+                    groupNames.add(group.groupName.toString())
+                    Log.d(this.toString(), group.groupName.toString())
                 }
 
                 mainAdapter.notifyDataSetChanged()
@@ -131,11 +140,7 @@ class MainActivity : AppCompatActivity() {
             })
         }//end of Btn
 
-        val infobtn = findViewById<Button>(R.id.myInfoBtn)
-        infobtn.setOnClickListener {
-            val intent = Intent(this, MyInfoActivity::class.java)
-            startActivity(intent)
-        }
+
     }
 
 
