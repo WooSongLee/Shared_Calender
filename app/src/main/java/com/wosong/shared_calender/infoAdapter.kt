@@ -25,10 +25,12 @@ class infoAdapter(val context : Context, val items : List<SavingModel>) : BaseAd
         if(convertView == null){
             convertView = LayoutInflater.from(parent?.context).inflate(R.layout.lisview_dialog_item,parent,false)
         }
+        val nickname = convertView!!.findViewById<TextView>(R.id.infoNickname)
         val hour = convertView!!.findViewById<TextView>(R.id.inforHour)
         val minute = convertView!!.findViewById<TextView>(R.id.ifoMinute)
         val information = convertView!!.findViewById<TextView>(R.id.infoInformation)
 
+        nickname.text = items[position].nickname
         hour.text = items[position].hour
         minute.text = items[position].minute
         information.text = items[position].info

@@ -7,44 +7,42 @@
     android:layout_height="wrap_content">
 
    <LinearLayout
+       android:layout_margin="5dp"
        android:background="#C7C8CC"
        android:layout_width="match_parent"
-       android:layout_height="70dp">
+       android:layout_height="wrap_content">
 
        <TextView
            android:background="#C7C8CC"
-           android:layout_margin="20sp"
            android:text="group Name : "
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"/>
 
        <TextView
+           android:layout_marginLeft="10dp"
            android:background="#C7C8CC"
            android:id="@+id/groupname"
-           android:layout_margin="20sp"
            android:text="groupname "
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"/>
    </LinearLayout>
 
     <LinearLayout
+        android:layout_margin="5dp"
         android:background="#C7C8CC"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
             android:background="#C7C8CC"
-           android:layout_marginLeft="20sp"
-            android:layout_marginBottom="20sp"
             android:text="gorupCount : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:layout_marginBottom="20sp"
+            android:layout_marginLeft="10dp"
             android:background="#C7C8CC"
             android:id="@+id/groupCount"
-            android:layout_marginLeft="40sp"
             android:text="admin "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

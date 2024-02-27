@@ -1,6 +1,7 @@
 package com.wosong.shared_calender
 
 import Model.SavingModel
+import Model.UserModel
 import Model.dateInfoModel
 import android.graphics.Color
 import android.os.Build
@@ -19,6 +20,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.children
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -46,6 +48,7 @@ class Calender : AppCompatActivity() {
     // Firebase에 저장할 데이터의 레퍼런스
     private val selectedDates : MutableList<SavingModel> = mutableListOf()
     private var selectedDate: LocalDate? = null
+    private var nickname : String = ""
     private lateinit var database: DatabaseReference
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -56,11 +59,8 @@ class Calender : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().reference
         val groupName = intent.getStringExtra("groupName").toString()
 
-        setUpCalendar()
+        getNickname()
 
-        reloadCalendar()
-
-        byindingCalendar()
 
 
     }
@@ -173,7 +173,7 @@ class Calender : AppCompatActivity() {
         val mDialog = LayoutInflater.from(this).inflate(R.layout.calendar_dialog, null)
         val mBulider = AlertDialog.Builder(this)
             .setView(mDialog)
-            .setTitle("Creating Group")
+            .setTitle("Saving info")
         val mAlertDialog = mBulider.show()
         //dialog size adjustment
         val window = mAlertDialog.window
@@ -185,7 +185,13 @@ class Calender : AppCompatActivity() {
         hour!!.maxValue = 24
         val minute = mAlertDialog.findViewById<NumberPicker>(R.id.minutePicker)
         minute!!.minValue = 0
-        minute!!.maxValue = 60
+        minute!!.maxValue = 5
+        val displayedValues = Array(6) { index -> (index * 10).toString() }
+        minute.displayedValues = displayedValues
+        minute.setOnValueChangedListener { picker, oldVal, newVal ->
+            val newValue = newVal * 10
+        }
+
         val info = mAlertDialog.findViewById<EditText>(R.id.CalenderText)
         val groupName = intent.getStringExtra("groupName")
         database = Firebase.database.reference
@@ -194,7 +200,7 @@ class Calender : AppCompatActivity() {
                 //다른날짜를 클릭했다면, 뷰 컨테이너 클래스에서 selectedDate가 업데이트 되었을 것이기 때문에
                 //이차원 배열에 날짜랑 정보를 쌍으로 저장.
 
-                val savingModel = SavingModel(selectedDate.toString(),hour.value.toString(), minute.value.toString(), info!!.text.toString())
+                val savingModel = SavingModel(selectedDate.toString(),nickname,hour.value.toString(), (minute.value*10).toString(), info!!.text.toString())
 
                 selectedDates.add(savingModel)
 
@@ -206,6 +212,34 @@ class Calender : AppCompatActivity() {
              }
             return true
         }//end of showDialog()
+    fun getNickname(){
+        database = Firebase.database.reference
+        val uid = Firebase.auth.currentUser?.uid
+
+        if(uid != null){
+            val postReference = database.child("userModel").child(uid)
+
+            postReference.addListenerForSingleValueEvent(object : ValueEventListener{
+                @RequiresApi(Build.VERSION_CODES.O)
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val userModel = snapshot.getValue(UserModel::class.java)
+                    userModel?.let {
+                        nickname = userModel.nickname
+                        Log.e("nickname", nickname)
+
+
+                        setUpCalendar()
+
+                        reloadCalendar()
+
+                        byindingCalendar()
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
+        }
+    }
     @RequiresApi(Build.VERSION_CODES.O)
     fun showInfoDialog(){
         val mDialog = LayoutInflater.from(this).inflate(R.layout.info_dialog,null)
@@ -221,15 +255,16 @@ class Calender : AppCompatActivity() {
         val date = mAlertDialog.findViewById<TextView>(R.id.DateInfo)
         date!!.text = selectedDate.toString()
 
-        //여기에 현재 localDate와 일치하는 정보만 저장시키고 adapter연결
+        //현재 선택된 날짜에 있는 정보들만 새 리스트에 저장
         val inflateInfo : MutableList<SavingModel> = mutableListOf()
+        for(data in selectedDates){
+            //현재 선택한 날짜의 데이터
+            //데이터중복 방지를 위해 저장하려고 하는 데이터가 inflateInfoList에 포함되어 있지 않다면
+            if(data.localDate == selectedDate.toString() && !inflateInfo.contains(data)){
+                inflateInfo.add(data)
+            }
+        }
 
-        inflateInfo.add(SavingModel(selectedDate.toString(),"1","1","information"))
-        inflateInfo.add(SavingModel(selectedDate.toString(),"1","1","information"))
-        inflateInfo.add(SavingModel(selectedDate.toString(),"1","1","information"))
-        inflateInfo.add(SavingModel(selectedDate.toString(),"1","1","information"))
-        inflateInfo.add(SavingModel(selectedDate.toString(),"1","1","information"))
-        inflateInfo.add(SavingModel(selectedDate.toString(),"1","1","information"))
 
         val listView = mAlertDialog.findViewById<ListView>(R.id.dialog_list)
         val adapter = infoAdapter(baseContext, inflateInfo)

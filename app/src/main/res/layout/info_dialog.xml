@@ -38,8 +38,9 @@
 
     <ListView
         android:id="@+id/dialog_list"
-        android:layout_margin="20sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="20sp"
+        android:background="#B4B4B8" />
 
 </LinearLayout>

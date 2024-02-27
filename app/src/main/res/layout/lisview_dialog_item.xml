@@ -1,50 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:background="#B4B4B8"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:background="#B4B4B8"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:background="#B4B4B8"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nickname : "/>
+        <TextView
+            android:background="#B4B4B8"
+            android:id="@+id/infoNickname"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nickname"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#B4B4B8"
         android:orientation="horizontal"
         android:layout_margin="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:background="#B4B4B8"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="hour : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
+            android:background="#B4B4B8"
             android:id="@+id/inforHour"
             android:layout_marginLeft="20sp"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="hour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:background="#B4B4B8"
             android:textStyle="bold"
             android:layout_marginLeft="50dp"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="minute : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
+            android:background="#B4B4B8"
             android:id="@+id/ifoMinute"
             android:layout_marginLeft="20sp"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="minute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <LinearLayout
+        android:background="#B4B4B8"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:background="#B4B4B8"
             android:textStyle="bold"
             android:layout_marginLeft="20sp"
             android:textSize="15sp"
@@ -52,6 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
+            android:background="#B4B4B8"
             android:id="@+id/infoInformation"
             android:layout_marginBottom="30sp"
             android:layout_marginTop="10dp"
