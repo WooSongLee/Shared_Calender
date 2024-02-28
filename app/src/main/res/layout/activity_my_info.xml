@@ -23,18 +23,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <TextView
-        android:textSize="20sp"
-        android:layout_margin="20sp"
-        android:text="nickname : "
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="20sp"
+            android:layout_margin="20sp"
+            android:text="nickname : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/nicknameArea"
+            android:textSize="20sp"
+            android:layout_margin="20sp"
+            android:text="nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
-    <TextView
-        android:textSize="20sp"
-        android:layout_margin="20sp"
-        android:text="currentGroupCount : "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
 </LinearLayout>
